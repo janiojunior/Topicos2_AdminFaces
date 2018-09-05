@@ -10,49 +10,37 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import br.unitins.topicos2.factory.JPAFactory;
 import br.unitins.topicos2.model.Pessoa;
+import br.unitins.topicos2.repository.PessoaRepository;
 
 @Named
 @ViewScoped
-public class PessoaController implements Serializable {
+public class PessoaController extends Controller  {
 
 	private static final long serialVersionUID = -4270221378549569000L;
 
-	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Topicos2");
-	private EntityManager em = emf.createEntityManager();
-	
-	private Pessoa pessoa = null;
 	private List<Pessoa> listaPessoa = null;
 	
-	public void incluir() {
-		em.getTransaction().begin();
-		em.persist(getPessoa());
-		em.getTransaction().commit();
-		limpar();
-		System.out.println("Feito");
-	}
 	
 	public void limpar() {
-		setPessoa(null);
+		setEntity(null);
 		listaPessoa = null;
 	}
 	
 	public List<Pessoa> getListaPessoa() {
-		if (listaPessoa == null) {
-			listaPessoa = em.createQuery("Select p From Pessoa p").getResultList();
-			if (listaPessoa == null)
-				listaPessoa = new ArrayList<Pessoa>();
-		}
+		PessoaRepository repository = new PessoaRepository(getEntityManager());
+		if (listaPessoa == null)
+			listaPessoa = repository.getPessoas();
+		
 		return listaPessoa;
 	}
 
-	public Pessoa getPessoa() {
-		if (pessoa == null)
-			pessoa = new Pessoa();
-		return pessoa;
+	public Pessoa getEntity() {
+		if (entity == null)
+			entity = new Pessoa();
+		return entity;
 	}
 
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
+
 }
