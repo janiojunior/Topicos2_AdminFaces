@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class DefaultEntity implements Serializable{
+public class DefaultEntity<T> implements Serializable{
 
 	private static final long serialVersionUID = 2248843222433370351L;
 

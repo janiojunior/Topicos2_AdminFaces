@@ -7,23 +7,11 @@ import javax.persistence.EntityManager;
 
 import br.unitins.topicos2.model.Pessoa;
 
-public class PessoaRepository {
-	private EntityManager em;
+public class PessoaRepository extends Repository<Pessoa> {
+	
 	
 	public PessoaRepository(EntityManager em) {
-		this.em = em;
-	}
-	
-	public void save(Pessoa entity) {
-		getEntityManager().merge(entity);
-	}
-	
-	public void remove(Pessoa entity) {
-		getEntityManager().remove(entity);
-	}
-	
-	public EntityManager getEntityManager() {
-		return em;
+		super(em);
 	}
 	
 	@SuppressWarnings("unchecked")

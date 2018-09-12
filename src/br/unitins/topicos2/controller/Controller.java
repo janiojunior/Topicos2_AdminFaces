@@ -5,20 +5,22 @@ import java.io.Serializable;
 import javax.persistence.EntityManager;
 
 import br.unitins.topicos2.factory.JPAFactory;
+import br.unitins.topicos2.model.DefaultEntity;
 import br.unitins.topicos2.model.Pessoa;
 import br.unitins.topicos2.repository.PessoaRepository;
+import br.unitins.topicos2.repository.Repository;
 
-public abstract class Controller implements Serializable {
+public abstract class Controller<T extends DefaultEntity<T>> implements Serializable {
 	
 	private static final long serialVersionUID = -4859697154833778954L;
 	
 	private EntityManager em = null;
 	
-	protected Pessoa entity = null;
+	protected T entity = null;
 	
-	public abstract Pessoa getEntity();
+	public abstract T getEntity();
 	
-	public void setEntity(Pessoa entity) {
+	public void setEntity(T entity) {
 		this.entity = entity;
 	}
 	
@@ -30,33 +32,35 @@ public abstract class Controller implements Serializable {
 	
 	public abstract void limpar();
 	
-	public void incluir() {
-		PessoaRepository repository = new PessoaRepository(getEntityManager());
+	public T incluir() {
+		Repository<T> repository = new Repository<T>(getEntityManager());
 		getEntityManager().getTransaction().begin();
 		
 		// incluir 
-		repository.save(getEntity());
+		T result = repository.save(getEntity());
 		//getEntityManager().persist(getPessoa());
 		
 		getEntityManager().getTransaction().commit();
 		limpar();
 		System.out.println("Incluir");
+		return result;
 	}
 	
-	public void alterar() {
-		PessoaRepository repository = new PessoaRepository(getEntityManager());
+	public T alterar() {
+		Repository<T> repository = new Repository<T>(getEntityManager());
 		getEntityManager().getTransaction().begin();
 		
 		// alterar 
-		repository.save(getEntity());
+		T result = repository.save(getEntity());
 		
 		getEntityManager().getTransaction().commit();
 		limpar();
 		System.out.println("Alterar");
+		return result;
 	}
 	
 	public void remover() {
-		PessoaRepository repository = new PessoaRepository(getEntityManager());
+		Repository<T> repository = new Repository<T>(getEntityManager());
 		getEntityManager().getTransaction().begin();
 		
 		// remover 
