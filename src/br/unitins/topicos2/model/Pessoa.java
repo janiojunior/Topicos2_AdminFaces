@@ -3,14 +3,16 @@ package br.unitins.topicos2.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.Transient;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 
 @Entity
 public class Pessoa extends DefaultEntity<Pessoa> {
 
 	private static final long serialVersionUID = -3763771903748482697L;
 
-	@Transient
+	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
 	
 	private String nome;

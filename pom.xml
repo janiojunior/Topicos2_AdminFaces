@@ -8,6 +8,12 @@
 	<packaging>war</packaging>
 	<dependencies>
 		<dependency>
+			<groupId>com.github.adminfaces</groupId>
+			<artifactId>admin-theme</artifactId>
+			<version>1.0.0-RC18</version>
+			<!--<classifier>dev</classifier> uncompressed theme.css -->
+		</dependency>	
+		<dependency>
 			<groupId>org.glassfish</groupId>
 			<artifactId>javax.faces</artifactId>
 			<version>2.3.4</version>
