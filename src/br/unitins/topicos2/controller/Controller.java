@@ -4,10 +4,9 @@ import java.io.Serializable;
 
 import javax.persistence.EntityManager;
 
+import br.unitins.topicos2.application.Util;
 import br.unitins.topicos2.factory.JPAFactory;
 import br.unitins.topicos2.model.DefaultEntity;
-import br.unitins.topicos2.model.Pessoa;
-import br.unitins.topicos2.repository.PessoaRepository;
 import br.unitins.topicos2.repository.Repository;
 
 public abstract class Controller<T extends DefaultEntity<T>> implements Serializable {
@@ -38,11 +37,15 @@ public abstract class Controller<T extends DefaultEntity<T>> implements Serializ
 		
 		// incluir 
 		T result = repository.save(getEntity());
-		//getEntityManager().persist(getPessoa());
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		
 		getEntityManager().getTransaction().commit();
 		limpar();
-		System.out.println("Incluir");
+		Util.addInfoMessage("Inclusão realizada com sucesso!");
 		return result;
 	}
 	
@@ -55,7 +58,7 @@ public abstract class Controller<T extends DefaultEntity<T>> implements Serializ
 		
 		getEntityManager().getTransaction().commit();
 		limpar();
-		System.out.println("Alterar");
+		Util.addInfoMessage("Alteração realizada com sucesso!");
 		return result;
 	}
 	
@@ -68,6 +71,6 @@ public abstract class Controller<T extends DefaultEntity<T>> implements Serializ
 		
 		getEntityManager().getTransaction().commit();
 		limpar();
-		System.out.println("Remover");
+		Util.addInfoMessage("Remoção realizada com sucesso!");
 	}
 }

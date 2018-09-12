@@ -8,10 +8,11 @@
         <title>Cadastro de Pessoa</title>
     </h:head>
     <h:body>
-<h:form>
+    	<p:growl id="growl"  autoUpdate="true" life="1200"/> 
+    
+		<h:form>
+		<p:focus for="itNome" />
 		<p:panel id="panel" header="Cadastro de Pessoa">
-
-			<p:messages id="msgs" />
 
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel for="itNome" value="Nome:" />
@@ -28,13 +29,19 @@
 			</h:panelGrid>
 
 			<p:commandButton value="Incluir" update="panel dataTable" process="@this panel"
-				actionListener="#{pessoaController.incluir}" icon="ui-icon-check" />
+				actionListener="#{pessoaController.incluir}" 
+				icon="ui-icon-check"
+				disabled="#{pessoaController.entity.id != null}" />
 			
 			<p:commandButton value="Alterar" update="panel dataTable" process="@this panel"
-				actionListener="#{pessoaController.alterar}" icon="ui-icon-check" />
+				actionListener="#{pessoaController.alterar}" 
+				icon="ui-icon-check" 
+				disabled="#{pessoaController.entity.id == null}" />
 			
 			<p:commandButton value="Excluir" update="panel dataTable" process="@this panel"
-				actionListener="#{pessoaController.remover}" icon="ui-icon-check" />
+				actionListener="#{pessoaController.remover}" 
+				icon="ui-icon-check" 
+				disabled="#{pessoaController.entity.id == null}" />
 				
 
 			<p:commandButton value="Limpar" update="panel" process="@this"
@@ -67,5 +74,10 @@
 		</p:dataTable>
 
 	</h:form>
+	<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+	 
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+	    <p:graphicImage name="/images/loading.gif" />
+	</p:dialog>	
     </h:body>
 </html>
