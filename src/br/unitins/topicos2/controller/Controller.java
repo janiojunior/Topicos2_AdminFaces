@@ -37,11 +37,6 @@ public abstract class Controller<T extends DefaultEntity<T>> implements Serializ
 		
 		// incluir 
 		T result = repository.save(getEntity());
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		
 		getEntityManager().getTransaction().commit();
 		limpar();
