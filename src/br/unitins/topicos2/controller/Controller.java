@@ -62,6 +62,7 @@ public abstract class Controller<T extends DefaultEntity<T>> implements Serializ
 		getEntityManager().getTransaction().begin();
 		
 		// remover 
+		repository.save(getEntity());
 		repository.remove(getEntity());
 		
 		getEntityManager().getTransaction().commit();

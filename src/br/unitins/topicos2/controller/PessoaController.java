@@ -1,5 +1,6 @@
 package br.unitins.topicos2.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
@@ -14,6 +15,8 @@ public class PessoaController extends Controller<Pessoa>  {
 
 	private static final long serialVersionUID = -4270221378549569000L;
 
+	private String pesquisa;
+	
 	private List<Pessoa> listaPessoa = null;
 	
 	
@@ -22,11 +25,14 @@ public class PessoaController extends Controller<Pessoa>  {
 		listaPessoa = null;
 	}
 	
-	public List<Pessoa> getListaPessoa() {
+	public void pesquisar() {
 		PessoaRepository repository = new PessoaRepository(getEntityManager());
+		listaPessoa = repository.getPessoas(pesquisa);
+	}
+	
+	public List<Pessoa> getListaPessoa() {
 		if (listaPessoa == null)
-			listaPessoa = repository.getPessoas();
-		
+			listaPessoa = new ArrayList<Pessoa>();
 		return listaPessoa;
 	}
 
@@ -37,9 +43,13 @@ public class PessoaController extends Controller<Pessoa>  {
 		return entity;
 	}
 
+	public String getPesquisa() {
+		return pesquisa;
+	}
 
-
-
+	public void setPesquisa(String pesquisa) {
+		this.pesquisa = pesquisa;
+	}
 
 
 }
