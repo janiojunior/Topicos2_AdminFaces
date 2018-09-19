@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+
+    <title>Tópicos em Programação II</title>
+	<h:outputStylesheet name="css/styleTemplateTeste.css"/>  
+    
+</h:head>
+
+<h:body>
+	
+	 <div class="wrapper">
+	 	<div class="box header">
+			<h1 >Tópicos em Programação II</h1>
+	 	</div>
+		<div class="box sidebar" style="text-align: center;">
+			<ui:insert name="menu">
+				<h1>Menu</h1>
+				<h:form>
+					
+					<h:commandLink value="Cadastro de Pessoas"
+						action="cadastropessoa3.xhtml" /> <br/>
+					<h:commandLink value="Cadastro de Pessoas"
+						action="cadastropessoa3.xhtml" /> <br/>
+					<h:commandLink value="Cadastro de Pessoas"
+						action="cadastropessoa.xhtml" /> <br/>
+						
+				</h:form>
+			</ui:insert>
+		</div>
+		<div class="box content">
+			<ui:insert name="conteudo">
+				<h1>TÓPICOS EM PROGRAMAÇÃO II</h1>
+			</ui:insert>
+		</div>
+		<div class="box footer" style="text-align: center;">
+			<h:outputText value="2018 - UNITINS - Todos os direitos reservados." />
+		</div>
+	</div>
+</h:body>
+</html>

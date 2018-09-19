@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<title>Tópicos em Programação II</title>
+</h:head>	
+<h:body>
+<p:layout fullPage="true">
+
+    <p:layoutUnit position="north" size="100" >
+		<ui:insert name="cabecalho">
+			<h1>Cabeçalho</h1>
+		</ui:insert>    
+    </p:layoutUnit>
+    
+    <p:layoutUnit position="west" size="200" >
+    	<ui:insert name="menu">
+			<h3>Menu</h3>
+		</ui:insert>    
+    </p:layoutUnit>
+
+    <p:layoutUnit position="center">
+    	<ui:insert name="conteudo">
+			<h2>Conteúdo</h2>
+		</ui:insert>
+    </p:layoutUnit>
+
+    <p:layoutUnit position="south" size="60" >
+    	<ui:insert name="rodape">
+			<h3>Rodapé</h3>
+		</ui:insert>
+    </p:layoutUnit>
+
+
+
+</p:layout>
+
+</h:body>
+</html>
