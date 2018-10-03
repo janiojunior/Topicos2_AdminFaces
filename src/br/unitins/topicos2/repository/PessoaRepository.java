@@ -6,9 +6,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import br.unitins.topicos2.model.Pessoa;
+import br.unitins.topicos2.model.PessoaFisica;
 
-public class PessoaRepository extends Repository<Pessoa> {
+public class PessoaRepository extends Repository<PessoaFisica> {
 	
 	
 	public PessoaRepository(EntityManager em) {
@@ -16,23 +16,23 @@ public class PessoaRepository extends Repository<Pessoa> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Pessoa> getPessoas(String nome) {
+	public List<PessoaFisica> getPessoas(String nome) {
 		Query query = getEntityManager().
 				createQuery("Select p From Pessoa p WHERE LOWER(p.nome) LIKE LOWER(:nome) Order by p.nome");
 		query.setParameter("nome", "%" + nome + "%");
-		List<Pessoa> lista = query.getResultList();
+		List<PessoaFisica> lista = query.getResultList();
 		
 		if (lista == null)
-			lista = new ArrayList<Pessoa>();
+			lista = new ArrayList<PessoaFisica>();
 		return lista;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Pessoa> getPessoas() {
-		List<Pessoa> lista = getEntityManager().
+	public List<PessoaFisica> getPessoas() {
+		List<PessoaFisica> lista = getEntityManager().
 				createQuery("Select p From Pessoa p Order by p.id desc").getResultList();
 			if (lista == null)
-				lista = new ArrayList<Pessoa>();
+				lista = new ArrayList<PessoaFisica>();
 		return lista;
 	}
 }

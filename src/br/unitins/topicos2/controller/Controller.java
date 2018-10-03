@@ -9,7 +9,7 @@ import br.unitins.topicos2.factory.JPAFactory;
 import br.unitins.topicos2.model.DefaultEntity;
 import br.unitins.topicos2.repository.Repository;
 
-public abstract class Controller<T extends DefaultEntity<T>> implements Serializable {
+public abstract class Controller<T extends DefaultEntity<? super T>> implements Serializable {
 	
 	private static final long serialVersionUID = -4859697154833778954L;
 	

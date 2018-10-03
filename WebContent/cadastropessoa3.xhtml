@@ -11,6 +11,52 @@
 			<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
 			    <p:graphicImage name="/images/loading.gif" />
 			</p:dialog>
+				<p:dialog header="Pesquisa de Pessoas" appendTo="@(body)" widgetVar="dlg" modal="true" height="400" closeOnEscape="true"  >
+					<h:form>
+						<p:inputText id="itPesquisa" value="#{pessoaController.pesquisa}"/>
+						<p:commandButton value="Pesquisar" 
+							actionListener="#{pessoaController.pesquisar}"
+							process="@this itPesquisa" 
+							update="formDataTable"/>
+					</h:form>
+					<p:panel styleClass="card no-border" toggleable="true"
+						toggleSpeed="300">
+						<h:form id="formDataTable">
+							<p:dataTable styleClass="box-primary" var="pessoa"
+								value="#{pessoaController.listaPessoa}">
+								<f:facet name="header">
+									<h:outputText value="Lista de Pessoas Cadastradas" />
+								</f:facet>
+								<p:column headerText="Id">
+									<h:outputText value="#{pessoa.id}" />
+								</p:column>
+			
+								<p:column headerText="Nome">
+									<p:commandLink value="#{pessoa.nome}" 
+											oncomplete="PF('dlg').hide();">
+										<f:ajax render="formDados" execute="@this" />
+										<f:setPropertyActionListener value="#{pessoa}"
+											target="#{pessoaController.entity}" />
+									</p:commandLink>
+								</p:column>
+			
+								<p:column headerText="Data de Nascimento">
+									<h:outputText value="#{pessoa.dataNascimento}">
+										<f:convertDateTime pattern="dd/MM/yyyy hh:mm:ss" locale="pt_BR" />
+									</h:outputText>
+								</p:column>
+			
+								<p:column headerText="Endereço">
+									<h:outputText value="#{pessoa.endereco}" />
+								</p:column>
+			
+								<p:column headerText="Email">
+									<h:outputText value="#{pessoa.email}" />
+								</p:column>
+							</p:dataTable>
+						</h:form>
+					</p:panel>
+				</p:dialog>				
 			<div style="position: absolute; top: 100px; left: 80%" >
 				<p:growl autoUpdate="true" />
 			</div>
@@ -95,53 +141,8 @@
 		
 				</p:panel>
 				<p:spacer />
-				<p:dialog header="Modal Dialog" widgetVar="dlg" modal="true" height="400">
-					<h:form>
-						<p:inputText id="itPesquisa" value="#{pessoaController.pesquisa}"/>
-						<p:commandButton value="Pesquisar" 
-							actionListener="#{pessoaController.pesquisar}"
-							process="@this itPesquisa" 
-							update="formDataTable"/>
-					</h:form>
-					<p:panel styleClass="card no-border" toggleable="true"
-						toggleSpeed="300">
-						<h:form id="formDataTable">
-							<p:dataTable styleClass="box-primary" var="pessoa"
-								value="#{pessoaController.listaPessoa}">
-								<f:facet name="header">
-									<h:outputText value="Lista de Pessoas Cadastradas" />
-								</f:facet>
-								<p:column headerText="Id">
-									<h:outputText value="#{pessoa.id}" />
-								</p:column>
-			
-								<p:column headerText="Nome">
-									<p:commandLink value="#{pessoa.nome}" 
-											oncomplete="PF('dlg').hide();">
-										<f:ajax render="formDados" execute="@this" />
-										<f:setPropertyActionListener value="#{pessoa}"
-											target="#{pessoaController.entity}" />
-									</p:commandLink>
-								</p:column>
-			
-								<p:column headerText="Data de Nascimento">
-									<h:outputText value="#{pessoa.dataNascimento}">
-										<f:convertDateTime pattern="dd/MM/yyyy hh:mm:ss" locale="pt_BR" />
-									</h:outputText>
-								</p:column>
-			
-								<p:column headerText="Endereço">
-									<h:outputText value="#{pessoa.endereco}" />
-								</p:column>
-			
-								<p:column headerText="Email">
-									<h:outputText value="#{pessoa.email}" />
-								</p:column>
-							</p:dataTable>
-						</h:form>
-					</p:panel>
-				</p:dialog>
 			</div>
+		
 		</ui:define>
 	</ui:composition>	
 </html>

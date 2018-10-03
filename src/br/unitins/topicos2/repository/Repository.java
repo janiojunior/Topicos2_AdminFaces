@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 
 import br.unitins.topicos2.model.DefaultEntity;
 
-public class Repository<T extends DefaultEntity<T>> {
+public class Repository<T extends DefaultEntity<? super T>> {
 	private EntityManager em = null;
 	
 	public Repository(EntityManager em) {

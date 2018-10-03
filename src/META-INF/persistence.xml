@@ -7,6 +7,8 @@
 	
 		<class>br.unitins.topicos2.model.DefaultEntity</class>
 		<class>br.unitins.topicos2.model.Pessoa</class>
+		<class>br.unitins.topicos2.model.PessoaFisica</class>
+		<class>br.unitins.topicos2.model.Telefone</class>
 		
 		<properties>
 			<property name="javax.persistence.jdbc.url"

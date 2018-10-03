@@ -12,7 +12,11 @@
 </h:head>
 
 <h:body>
-	
+	<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+	 
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+	    <p:graphicImage name="/images/loading.gif" />
+	</p:dialog>
 	 <div class="wrapper">
 	 	<div class="box header">
 			<h1 >Tópicos em Programação II</h1>
