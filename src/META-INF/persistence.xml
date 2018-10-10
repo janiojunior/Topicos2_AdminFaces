@@ -5,6 +5,7 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="Topicos2">
 	
+		<class>br.unitins.topicos2.model.Cidade</class>
 		<class>br.unitins.topicos2.model.DefaultEntity</class>
 		<class>br.unitins.topicos2.model.Pessoa</class>
 		<class>br.unitins.topicos2.model.PessoaFisica</class>

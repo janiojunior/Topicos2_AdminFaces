@@ -10,7 +10,6 @@ import br.unitins.topicos2.model.PessoaFisica;
 
 public class PessoaRepository extends Repository<PessoaFisica> {
 	
-	
 	public PessoaRepository(EntityManager em) {
 		super(em);
 	}

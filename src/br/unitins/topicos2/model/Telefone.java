@@ -2,7 +2,6 @@ package br.unitins.topicos2.model;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Telefone extends DefaultEntity<Telefone>{
@@ -13,7 +12,7 @@ public class Telefone extends DefaultEntity<Telefone>{
 	private String numero;
 	
 	@ManyToOne
-	private PessoaFisica pessoa;
+	private PessoaFisica pessoaFisica;
 	
 	public String getCodigoArea() {
 		return codigoArea;
@@ -26,6 +25,12 @@ public class Telefone extends DefaultEntity<Telefone>{
 	}
 	public void setNumero(String numero) {
 		this.numero = numero;
+	}
+	public PessoaFisica getPessoaFisida() {
+		return pessoaFisica;
+	}
+	public void setPessoaFisida(PessoaFisica pessoaFisica) {
+		this.pessoaFisica = pessoaFisica;
 	}
 
 }
