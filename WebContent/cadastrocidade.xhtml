@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	<ui:composition template="/template2.xhtml">
+		<ui:define name="conteudo">
+			<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+			 
+			<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+			    <p:graphicImage name="/images/loading.gif" />
+			</p:dialog>
+
+			<div style="position: absolute; top: 100px; left: 80%" >
+				<p:growl autoUpdate="true" />
+			</div>
+			<h2 class="align-center">.: Cadastro de Cidade :.</h2>
+			<div class="ui-g-12">
+				<p:panel styleClass="card no-border" toggleable="true"
+					toggleSpeed="300">
+		
+					<h:form id="formDados">
+						
+						<div style="text-align: left;"
+							class="ui-fluid #{layoutMB.flat ? 'ui-flat':''} ">
+							<p:panelGrid id="pgDados" columns="2"
+								columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid"
+								styleClass="ui-fluid card">
+								
+								<h:panelGroup>
+									<p:commandLink for="itNome" 
+											value="Nome:" 
+											process="@this"
+											actionListener="#{cidadeController.abrirListagemCidade}"
+											style="color:blue; text-decoration: underline;">
+											
+											<p:ajax event="dialogReturn" 
+											        listener="#{cidadeController.cidadeSelecionada}" 
+											        update="@form" />
+											
+									</p:commandLink>
+									<p:inputText id="itNome" value="#{cidadeController.entity.nome}" required="true">
+										<p:focus for="itNome" />								
+									</p:inputText>
+								</h:panelGroup>
+		
+								<h:panelGroup>
+									<p:outputLabel value="Estado:" />
+									<p:inputText value="#{cidadeController.entity.estado}" >
+		
+									</p:inputText>
+								</h:panelGroup>
+								<h:panelGroup>
+									<p:outputLabel value="País:" />
+									<p:inputText value="#{cidadeController.entity.pais}" />
+								</h:panelGroup>
+								<p:spacer />
+							</p:panelGrid>
+		
+						</div>
+		
+						<p:spacer />
+		
+						<p:panelGrid columns="4" style="text-align: center;"
+							columnClasses="ui-grid-col-2,ui-grid-col-2,ui-grid-col-2,ui-grid-col-2"
+							layout="grid" styleClass="ui-fluid  ">
+		
+							<p:commandButton value="Incluir" styleClass="btn-primary btn-block"
+								disabled="#{cidadeController.entity.id != null}"
+								actionListener="#{cidadeController.incluir}"
+								update="@form" process="@this pgDados" />
+		
+							<p:commandButton value="Alterar" styleClass="btn-primary btn-block"
+								disabled="#{cidadeController.entity.id == null}"
+								actionListener="#{cidadeController.alterar}"
+								update="@form" process="@this pgDados" />
+		
+							<p:commandButton value="Excluir" styleClass="btn-primary btn-block"
+								disabled="#{cidadeController.entity.id == null}"
+								actionListener="#{cidadeController.remover}"
+								update="@form" process="@this pgDados">
+								<p:confirm header="Confirmação" 
+											message="Deseja realmente excluir?" 
+											icon="ui-icon-alert" />
+							</p:commandButton>
+
+							<p:commandButton value="Limpar" styleClass="btn-primary btn-block"
+								actionListener="#{cidadeController.limpar}"
+								update="@form" process="@this" />
+						</p:panelGrid>
+
+		
+					</h:form>
+		
+				</p:panel>
+				<p:spacer />
+			</div>
+		
+		</ui:define>
+	</ui:composition>	
+</html>

@@ -1,6 +1,7 @@
 package br.unitins.topicos2.model;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -12,6 +13,7 @@ public class Telefone extends DefaultEntity<Telefone>{
 	private String numero;
 	
 	@ManyToOne
+	@JoinColumn(name="idPessoaFisca")
 	private PessoaFisica pessoaFisica;
 	
 	public String getCodigoArea() {

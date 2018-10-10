@@ -20,7 +20,7 @@ public class PessoaFisica extends Pessoa {
 	private String cpf;
 	private String rg;
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="pessoaFisica")
 	private List<Telefone> listaTelefone;
 	
 
