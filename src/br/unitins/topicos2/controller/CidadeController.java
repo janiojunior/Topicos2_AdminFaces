@@ -32,9 +32,13 @@ public class CidadeController extends Controller<Cidade>  {
 	
 	public void abrirListagemCidade() {
         Map<String,Object> options = new HashMap<String, Object>();
-        options.put("resizable", true); // nao permite redimencionar
+        options.put("resizable", false); // nao permite redimencionar
         options.put("draggable", false); // nao permite arrastar
         options.put("modal", true); // abrir como modal
+        options.put("width", "80%");
+        options.put("height", "500");
+        options.put("contentWidth", "100%");
+        options.put("contentHeight", "100%");
         PrimeFaces.current().dialog().openDynamic("listagemcidade", options, null);
     }
      

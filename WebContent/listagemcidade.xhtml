@@ -6,24 +6,26 @@
 
 <h:head>
 	<title>Listagem de Cidade</title>
+	<h:outputStylesheet name="css/styleTemplateTeste.css"/>  
 </h:head>
 
 <h:body>
 	
-	<p:panel styleClass="card no-border" toggleable="true"
-		toggleSpeed="300">
 		<h:form id="formDataTable">
 		
-			<p:outputLabel value="Nome da Cidade: "/>
-			<p:inputText id="itNome" value="#{cidadeListController.nome}"/>
-			<p:commandButton value="Pesquisar" 
-							 update="formDataTable" 
-							 process="@this itNome"
-							 actionListener="#{cidadeListController.pesquisar}"/>
+			<p:panelGrid id="pgDados" columns="3"
+						 columnClasses="ui-grid-col-1, ui-grid-col-9, ui-grid-col-2" layout="grid"
+						 styleClass="ui-fluid card">
+				<p:outputLabel value="Nome da Cidade: "/>
+				<p:inputText id="itNome" value="#{cidadeListController.nome}"/>
+				<p:commandButton value="Pesquisar" 
+								 update="formDataTable" 
+								 process="@this itNome"
+								 actionListener="#{cidadeListController.pesquisar}"/>
+				<p:focus for="itNome"/>
+			</p:panelGrid>
 		
-		
-			<p:dataTable styleClass="box-primary" var="obj"
-				value="#{cidadeListController.listaCidade}">
+			<p:dataTable styleClass="box-primary" var="obj" value="#{cidadeListController.listaCidade}">
 				<f:facet name="header">
 					<h:outputText value="Lista de Cidades" />
 				</f:facet>
@@ -45,6 +47,5 @@
 
 			</p:dataTable>
 		</h:form>
-	</p:panel>
 </h:body>
 </html>

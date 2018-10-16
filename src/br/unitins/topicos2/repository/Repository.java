@@ -20,6 +20,7 @@ public class Repository<T extends DefaultEntity<? super T>> {
 	}
 	
 	public void remove(T entity) {
+		entity = getEntityManager().merge(entity);
 		getEntityManager().remove(entity);
 	}
 }
