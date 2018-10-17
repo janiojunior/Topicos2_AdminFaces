@@ -33,26 +33,49 @@
 											onclick="PF('dlg').show();"
 											process="@this"
 											style="color:blue; text-decoration: underline;"/>
-									<p:inputText id="itNome" value="#{pessoaController.entity.nome}" required="true">
+									<p:inputText id="itNome" value="#{pessoaFisicaController.entity.nome}" required="true">
 										<p:focus for="itNome" />								
 									</p:inputText>
 								</h:panelGroup>
 		
 								<h:panelGroup>
 									<p:outputLabel value="Data de Nascimento:" />
-									<p:calendar value="#{pessoaController.entity.dataNascimento}"
+									<p:calendar value="#{pessoaFisicaController.entity.dataNascimento}"
 										pattern="dd/MM/yyyy" mask="true" locale="pt_BR" />
 								</h:panelGroup>
 		
 								<h:panelGroup>
 									<p:outputLabel value="Endereco:" />
-									<p:inputText value="#{pessoaController.entity.endereco}" >
+									<p:inputText value="#{pessoaFisicaController.entity.endereco}" >
 		
 									</p:inputText>
 								</h:panelGroup>
 								<h:panelGroup>
 									<p:outputLabel value="Email:" />
-									<p:inputText id="itEmail" value="#{pessoaController.entity.email}" />
+									<p:inputText id="itEmail" value="#{pessoaFisicaController.entity.email}" />
+								</h:panelGroup>
+								
+								<h:panelGroup>
+									<p:commandLink 
+											value="Cidade:" 
+											process="@this"
+											actionListener="#{pessoaFisicaController.abrirListagemCidade}"
+											style="color:blue; text-decoration: underline;">
+											
+											<p:ajax event="dialogReturn" 
+											        listener="#{pessoaFisicaController.cidadeSelecionada}" 
+											        update="@form" />
+											
+									</p:commandLink>
+									<p:inputText value="#{pessoaFisicaController.entity.cidadeNatal.nome}"
+											placeholder="Selecione a cidade ...." 
+											disabled="true"/>
+								</h:panelGroup>
+								<h:panelGroup>
+									<p:outputLabel value="Estado:" />
+									<p:inputText 
+										value="#{pessoaFisicaController.entity.cidadeNatal.estado}" 
+										disabled="true"/>
 								</h:panelGroup>
 								
 								<h:panelGroup>
@@ -60,12 +83,12 @@
 										
 										<h:panelGroup>
 											<p:outputLabel value="DDD:" />
-											<p:inputText value="#{pessoaController.telefone.codigoArea}"  />
+											<p:inputText value="#{pessoaFisicaController.telefone.codigoArea}"  />
 										</h:panelGroup>
 											
 										<h:panelGroup>			
 												<p:outputLabel value="Número:" />
-												<p:inputText value="#{pessoaController.telefone.numero}" />
+												<p:inputText value="#{pessoaFisicaController.telefone.numero}" />
 										</h:panelGroup>	
 											
 									</h:panelGrid>
@@ -73,14 +96,14 @@
 									<h:panelGroup>
 										<p:spacer />
 										<p:commandButton value="Adicionar" 
-											actionListener="#{pessoaController.adicionarTelefone}"
+											actionListener="#{pessoaFisicaController.adicionarTelefone}"
 											update="panelTelefone dtTelefone"
 											process="@this panelTelefone"/>
 									</h:panelGroup>
 								</h:panelGroup>
 								<h:panelGroup>
 									<p:dataTable id="dtTelefone" styleClass="box-primary" var="tel"
-										value="#{pessoaController.entity.listaTelefone}">
+										value="#{pessoaFisicaController.entity.listaTelefone}">
 										<f:facet name="header">
 											<h:outputText value="Lista de Telefones" />
 										</f:facet>
@@ -90,7 +113,11 @@
 										<p:column headerText="Número">
 											<h:outputText value="#{tel.numero}" />
 										</p:column>	
-											
+										<p:column>
+											<p:commandLink value="Remover" 
+													actionListener="#{pessoaFisicaController.removerTelefone(tel)}" 
+													update="dtTelefone" process="@this"/>
+										</p:column>	
 									</p:dataTable>
 															
 								</h:panelGroup>
@@ -106,18 +133,18 @@
 							layout="grid" styleClass="ui-fluid  ">
 		
 							<p:commandButton value="Incluir" styleClass="btn-primary btn-block"
-								disabled="#{pessoaController.entity.id != null}"
-								actionListener="#{pessoaController.incluir}"
+								disabled="#{pessoaFisicaController.entity.id != null}"
+								actionListener="#{pessoaFisicaController.incluir}"
 								update="@form formDataTable" process="@this pgDados" />
 		
 							<p:commandButton value="Alterar" styleClass="btn-primary btn-block"
-								disabled="#{pessoaController.entity.id == null}"
-								actionListener="#{pessoaController.alterar}"
+								disabled="#{pessoaFisicaController.entity.id == null}"
+								actionListener="#{pessoaFisicaController.alterar}"
 								update="@form formDataTable" process="@this pgDados" />
 		
 							<p:commandButton value="Excluir" styleClass="btn-primary btn-block"
-								disabled="#{pessoaController.entity.id == null}"
-								actionListener="#{pessoaController.remover}"
+								disabled="#{pessoaFisicaController.entity.id == null}"
+								actionListener="#{pessoaFisicaController.remover}"
 								update="@form formDataTable" process="@this pgDados">
 								<p:confirm header="Confirmação" 
 											message="Deseja realmente excluir?" 
@@ -125,7 +152,7 @@
 							</p:commandButton>
 
 							<p:commandButton value="Limpar" styleClass="btn-primary btn-block"
-								actionListener="#{pessoaController.limpar}"
+								actionListener="#{pessoaFisicaController.limpar}"
 								update="@form formDataTable" process="@this" />
 						</p:panelGrid>
 		
@@ -138,9 +165,9 @@
 				
 				<p:dialog header="Pesquisa de Pessoas" appendTo="@(body)" widgetVar="dlg" modal="true" height="400" closeOnEscape="true"  >
 					<h:form>
-						<p:inputText id="itPesquisa" value="#{pessoaController.pesquisa}"/>
+						<p:inputText id="itPesquisa" value="#{pessoaFisicaController.pesquisa}"/>
 						<p:commandButton value="Pesquisar" 
-							actionListener="#{pessoaController.pesquisar}"
+							actionListener="#{pessoaFisicaController.pesquisar}"
 							process="@this itPesquisa" 
 							update="formDataTable"/>
 					</h:form>
@@ -148,7 +175,7 @@
 						toggleSpeed="300">
 						<h:form id="formDataTable">
 							<p:dataTable styleClass="box-primary" var="pessoa"
-								value="#{pessoaController.listaPessoa}">
+								value="#{pessoaFisicaController.listaPessoa}">
 								<f:facet name="header">
 									<h:outputText value="Lista de Pessoas Cadastradas" />
 								</f:facet>
@@ -161,7 +188,7 @@
 											oncomplete="PF('dlg').hide();">
 										<f:ajax render="formDados" execute="@this" />
 										<f:setPropertyActionListener value="#{pessoa}"
-											target="#{pessoaController.entity}" />
+											target="#{pessoaFisicaController.entity}" />
 									</p:commandLink>
 								</p:column>
 			

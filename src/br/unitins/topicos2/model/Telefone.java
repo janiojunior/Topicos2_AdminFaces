@@ -13,8 +13,8 @@ public class Telefone extends DefaultEntity<Telefone>{
 	private String numero;
 	
 	@ManyToOne
-	@JoinColumn(name="idPessoaFisca")
-	private PessoaFisica pessoaFisica;
+	@JoinColumn(name="idPessoa")
+	private Pessoa pessoa;
 	
 	public String getCodigoArea() {
 		return codigoArea;
@@ -28,11 +28,11 @@ public class Telefone extends DefaultEntity<Telefone>{
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
-	public PessoaFisica getPessoaFisida() {
-		return pessoaFisica;
+	public Pessoa getPessoa() {
+		return pessoa;
 	}
-	public void setPessoaFisida(PessoaFisica pessoaFisica) {
-		this.pessoaFisica = pessoaFisica;
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 
 }

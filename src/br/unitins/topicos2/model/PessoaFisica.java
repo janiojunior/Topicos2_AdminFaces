@@ -1,14 +1,12 @@
 package br.unitins.topicos2.model;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 
 @Entity
 public class PessoaFisica extends Pessoa {
@@ -20,9 +18,9 @@ public class PessoaFisica extends Pessoa {
 	private String cpf;
 	private String rg;
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="pessoaFisica")
-	private List<Telefone> listaTelefone;
-	
+	@ManyToOne
+	@JoinColumn(name="idCidadeNatal")
+	private Cidade cidadeNatal;
 
 	public Date getDataNascimento() {
 		return dataNascimento;
@@ -48,13 +46,12 @@ public class PessoaFisica extends Pessoa {
 		this.rg = rg;
 	}
 
-	public List<Telefone> getListaTelefone() {
-		return listaTelefone;
+	public Cidade getCidadeNatal() {
+		return cidadeNatal;
 	}
 
-	public void setListaTelefone(List<Telefone> listaTelefone) {
-		this.listaTelefone = listaTelefone;
+	public void setCidadeNatal(Cidade cidadeNatal) {
+		this.cidadeNatal = cidadeNatal;
 	}
-	
-	
+
 }
