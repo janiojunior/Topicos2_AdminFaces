@@ -17,10 +17,20 @@ public class PessoaFisica extends Pessoa {
 	private Date dataNascimento;
 	private String cpf;
 	private String rg;
-	
+	private Sexo sexo;
+	private CorPeleHumana corPeleHumana;
+
 	@ManyToOne
-	@JoinColumn(name="idCidadeNatal")
+	@JoinColumn(name = "idCidadeNatal")
 	private Cidade cidadeNatal;
+
+	@ManyToOne
+	@JoinColumn(name = "idCidadeAtual")
+	private Cidade cidadeAtual;
+
+	@ManyToOne
+	@JoinColumn(name = "idCidadeFutura")
+	private Cidade cidadeFutura;
 
 	public Date getDataNascimento() {
 		return dataNascimento;
@@ -52,6 +62,38 @@ public class PessoaFisica extends Pessoa {
 
 	public void setCidadeNatal(Cidade cidadeNatal) {
 		this.cidadeNatal = cidadeNatal;
+	}
+
+	public Sexo getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(Sexo sexo) {
+		this.sexo = sexo;
+	}
+
+	public CorPeleHumana getCorPeleHumana() {
+		return corPeleHumana;
+	}
+
+	public void setCorPeleHumana(CorPeleHumana corPeleHumana) {
+		this.corPeleHumana = corPeleHumana;
+	}
+
+	public Cidade getCidadeAtual() {
+		return cidadeAtual;
+	}
+
+	public void setCidadeAtual(Cidade cidadeAtual) {
+		this.cidadeAtual = cidadeAtual;
+	}
+
+	public Cidade getCidadeFutura() {
+		return cidadeFutura;
+	}
+
+	public void setCidadeFutura(Cidade cidadeFutura) {
+		this.cidadeFutura = cidadeFutura;
 	}
 
 }

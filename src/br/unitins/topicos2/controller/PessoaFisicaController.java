@@ -11,9 +11,13 @@ import javax.inject.Named;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
 
+import br.unitins.topicos2.factory.JPAFactory;
 import br.unitins.topicos2.model.Cidade;
+import br.unitins.topicos2.model.CorPeleHumana;
 import br.unitins.topicos2.model.PessoaFisica;
+import br.unitins.topicos2.model.Sexo;
 import br.unitins.topicos2.model.Telefone;
+import br.unitins.topicos2.repository.CidadeRepository;
 import br.unitins.topicos2.repository.PessoaRepository;
 
 @Named
@@ -27,6 +31,8 @@ public class PessoaFisicaController extends Controller<PessoaFisica>  {
 	private Telefone telefone;
 	
 	private List<PessoaFisica> listaPessoa = null;
+	
+	private List<Cidade> listaCidade = null;
 	
 	
 	public void adicionarTelefone() {
@@ -109,5 +115,27 @@ public class PessoaFisicaController extends Controller<PessoaFisica>  {
         Cidade cidade = (Cidade) event.getObject();
         getEntity().setCidadeNatal(cidade);
     }
+	
+	public Sexo[] getVetorSexo() {
+		return Sexo.values();
+	}
+	
+	public CorPeleHumana[] getVetorCorPeleHumana() {
+		return CorPeleHumana.values();
+	}
+	
+	public List<Cidade> getListaCidade() {
+		if (listaCidade == null) {
+			CidadeRepository repo = new CidadeRepository(JPAFactory.getEntityManager());
+			listaCidade = repo.getCidades("");
+		}
+		return listaCidade;
+	}
+	
+	public List<Cidade> getListaCidadeAutoComplete(String nome) {
+		CidadeRepository repo = new CidadeRepository(JPAFactory.getEntityManager());
+		listaCidade = repo.getCidades(nome, 2);
+		return listaCidade;
+	}
 
 }

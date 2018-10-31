@@ -12,7 +12,9 @@
 			    <p:graphicImage name="/images/loading.gif" />
 			</p:dialog>
 			<div style="position: absolute; top: 100px; left: 80%" >
-				<p:growl autoUpdate="true" />
+				<p:growl >
+					<p:autoUpdate disabled="false"/>
+				</p:growl>
 			</div>
 			<h2 class="align-center">.: Cadastro de Pessoa :.</h2>
 			<div class="ui-g-12">
@@ -76,6 +78,46 @@
 									<p:inputText 
 										value="#{pessoaFisicaController.entity.cidadeNatal.estado}" 
 										disabled="true"/>
+								</h:panelGroup>
+								
+								<h:panelGroup>
+									<p:outputLabel value="Cidade Atual:"/>
+									<p:selectOneMenu value="#{pessoaFisicaController.entity.cidadeAtual}" >
+										<f:selectItem itemLabel="Selecione ...." itemValue=""/>
+										<f:selectItems value="#{pessoaFisicaController.listaCidade}"
+												var="cidade" 
+												itemLabel="#{cidade.nome.concat(' - ').concat(cidade.estado)}" 
+												itemValue="#{cidade}"/>
+									</p:selectOneMenu>
+								</h:panelGroup>
+								
+								<h:panelGroup>
+									<p:outputLabel value="Cidade Futura:"/>
+        							<p:autoComplete  
+        								value="#{pessoaFisicaController.entity.cidadeFutura}"
+        								var="cidade"
+        								itemLabel="#{cidade.nome.concat(' - ').concat(cidade.estado)}" 
+										itemValue="#{cidade}"
+        								completeMethod="#{pessoaFisicaController.getListaCidadeAutoComplete}" />
+ 
+								</h:panelGroup>
+								
+								<h:panelGroup>
+									<p:outputLabel value="Sexo:"/>
+									<p:selectOneMenu value="#{pessoaFisicaController.entity.sexo}">
+										<f:selectItem itemLabel="Selecione ...." itemValue=""/>
+										<f:selectItems value="#{pessoaFisicaController.vetorSexo}"
+												var="sexo" itemLabel="#{sexo.label}" itemValue="#{sexo}"/>
+									</p:selectOneMenu>
+								</h:panelGroup>
+								
+								<h:panelGroup>
+									<p:outputLabel value="Cor da pele:"/>
+									<p:selectOneRadio value="#{pessoaFisicaController.entity.corPeleHumana}">
+										<f:selectItem itemLabel="Não sei" itemValue=""/>
+										<f:selectItems value="#{pessoaFisicaController.vetorCorPeleHumana}"
+												var="cor" itemLabel="#{cor.label}" itemValue="#{cor}"/>
+									</p:selectOneRadio>
 								</h:panelGroup>
 								
 								<h:panelGroup>
@@ -153,7 +195,9 @@
 
 							<p:commandButton value="Limpar" styleClass="btn-primary btn-block"
 								actionListener="#{pessoaFisicaController.limpar}"
-								update="@form formDataTable" process="@this" />
+								update="@form formDataTable" process="@this">
+								<p:resetInput target="@form"/>	
+							</p:commandButton>
 						</p:panelGrid>
 		
 

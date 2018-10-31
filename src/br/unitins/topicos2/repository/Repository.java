@@ -23,4 +23,8 @@ public class Repository<T extends DefaultEntity<? super T>> {
 		entity = getEntityManager().merge(entity);
 		getEntityManager().remove(entity);
 	}
+	
+	public T find(Integer id, Class<T> clazz) {
+		return  getEntityManager().find(clazz, id);
+	}
 }
