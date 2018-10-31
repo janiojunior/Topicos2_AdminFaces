@@ -126,16 +126,15 @@ public class PessoaFisicaController extends Controller<PessoaFisica>  {
 	
 	public List<Cidade> getListaCidade() {
 		if (listaCidade == null) {
-			CidadeRepository repo = new CidadeRepository(JPAFactory.getEntityManager());
+			CidadeRepository repo = new CidadeRepository(getEntityManager());
 			listaCidade = repo.getCidades("");
 		}
 		return listaCidade;
 	}
 	
 	public List<Cidade> getListaCidadeAutoComplete(String nome) {
-		CidadeRepository repo = new CidadeRepository(JPAFactory.getEntityManager());
-		listaCidade = repo.getCidades(nome, 2);
-		return listaCidade;
+		CidadeRepository repo = new CidadeRepository(getEntityManager());
+		return  repo.getCidades(nome, 2);
 	}
 
 }
