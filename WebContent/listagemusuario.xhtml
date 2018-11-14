@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Listagem de Usuário</title>
+	<h:outputStylesheet name="css/styleTemplateTeste.css"/>  
+</h:head>
+
+<h:body>
+	<h:form id="formDataTable">
+	
+		<p:panelGrid id="pgDados" columns="3"
+					 columnClasses="ui-grid-col-1, ui-grid-col-9, ui-grid-col-2" layout="grid"
+					 styleClass="ui-fluid card">
+			<p:outputLabel value="Nome do Usuário: "/>
+			<p:inputText id="itNome" value="#{usuarioListController.nome}"/>
+			<p:commandButton value="Pesquisar" 
+							 update="formDataTable" 
+							 process="@this itNome"
+							 actionListener="#{usuarioListController.pesquisar}"/>
+			<p:focus for="itNome"/>
+		</p:panelGrid>
+	
+		<p:dataTable styleClass="box-primary" var="obj" value="#{usuarioListController.listaUsuario}">
+			<f:facet name="header">
+				<h:outputText value="Lista de Usuários" />
+			</f:facet>
+
+			<p:column headerText="Nome">
+				<p:commandLink value="#{obj.nome}" 
+							   actionListener="#{usuarioListController.selecionar(obj)}">
+				
+				</p:commandLink>
+			</p:column>
+			
+			<p:column headerText="Tipo de Usuário">
+				<h:outputText value="#{obj.tipoUsuario.label}" />
+			</p:column>
+
+			<p:column headerText="Email">
+				<h:outputText value="#{obj.email}"/>
+			</p:column>
+
+			<p:column headerText="Senha">
+				<h:outputText value="#{obj.senha}" />
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

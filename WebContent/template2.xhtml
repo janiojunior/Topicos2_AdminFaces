@@ -20,6 +20,14 @@
 	 <div class="wrapper">
 	 	<div class="box header">
 			<h1 >Tópicos em Programação II</h1>
+			<div style="text-align: right;">
+				<h:form>
+					<h:outputLabel value="Olá #{templateController.usuarioLogado.nome}"/>
+					<h:commandLink value=" (Sair)" 
+						action="#{templateController.encerrarSessao}"
+						style="color:white"/>
+				</h:form>
+			</div>
 	 	</div>
 		<div class="box sidebar" style="text-align: center;">
 			<ui:insert name="menu">

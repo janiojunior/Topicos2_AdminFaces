@@ -10,6 +10,7 @@
 		<class>br.unitins.topicos2.model.Pessoa</class>
 		<class>br.unitins.topicos2.model.PessoaFisica</class>
 		<class>br.unitins.topicos2.model.Telefone</class>
+		<class>br.unitins.topicos2.model.Usuario</class>
 		
 		<properties>
 			<property name="javax.persistence.jdbc.url"
