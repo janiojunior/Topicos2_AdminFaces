@@ -3,6 +3,7 @@ package br.unitins.topicos2.controller;
 import java.io.Serializable;
 
 import br.unitins.topicos2.application.Session;
+import br.unitins.topicos2.application.Util;
 import br.unitins.topicos2.model.Usuario;
 
 public class DefaultController implements Serializable {
@@ -20,6 +21,7 @@ public class DefaultController implements Serializable {
 	
 	public void encerrarSessao() {
 		Session.getInstance().invalidateSession();
+		Util.redirect("login.xhtml");
 	}
 	
 }

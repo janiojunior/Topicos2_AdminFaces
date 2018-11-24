@@ -29,7 +29,7 @@ public class LoginController extends DefaultController {
 		// setando o usuario na sessao
 		setUsuarioLogado(usuarioValidado);
 		
-		return "cadastropessoa4.xhtml";
+		return "pages/cadastropessoa4.xhtml";
 	}
 
 	public Usuario getUsuario() {

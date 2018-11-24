@@ -1,6 +1,7 @@
 package br.unitins.topicos2.controller;
 
 import javax.persistence.EntityManager;
+import javax.persistence.OptimisticLockException;
 
 import br.unitins.topicos2.application.Util;
 import br.unitins.topicos2.factory.JPAFactory;
@@ -43,16 +44,22 @@ public abstract class Controller<T extends DefaultEntity<? super T>> extends Def
 	}
 	
 	public T alterar() {
-		Repository<T> repository = new Repository<T>(getEntityManager());
-		getEntityManager().getTransaction().begin();
-		
-		// alterar 
-		T result = repository.save(getEntity());
-		
-		getEntityManager().getTransaction().commit();
-		limpar();
-		Util.addInfoMessage("Alteração realizada com sucesso!");
-		return result;
+		try {
+			Repository<T> repository = new Repository<T>(getEntityManager());
+			getEntityManager().getTransaction().begin();
+			
+			// alterar 
+			T result = repository.save(getEntity());
+			
+			getEntityManager().getTransaction().commit();
+			limpar();
+			Util.addInfoMessage("Alteração realizada com sucesso!");
+			return result;
+		} catch (OptimisticLockException exception) {
+			// capiturando a excecao do version
+			Util.addInfoMessage("Erro de concorrencia.");
+			return null;
+		}
 	}
 	
 	public void remover() {

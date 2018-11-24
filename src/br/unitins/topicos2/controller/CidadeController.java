@@ -3,8 +3,7 @@ package br.unitins.topicos2.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
+import javax.annotation.security.RolesAllowed;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
@@ -15,6 +14,7 @@ import br.unitins.topicos2.model.Cidade;
 
 @Named
 @ViewScoped
+@RolesAllowed("ADMINISTRADOR")
 public class CidadeController extends Controller<Cidade>  {
 
 	private static final long serialVersionUID = 4689020451003580454L;

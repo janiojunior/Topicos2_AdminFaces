@@ -1,5 +1,6 @@
 package br.unitins.topicos2.application;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -46,8 +47,14 @@ public class Util {
 		
 		return "Erro ao encriptar";
 	}
-	public static void main(String[] args) {
-		
-		System.out.println(Util.encrypt("janio"));
+	
+	public static void redirect(String page) {
+		FacesContext context = FacesContext.getCurrentInstance();
+         try {
+        	 context.getExternalContext().redirect(page);
+		 } catch (IOException e) {
+			 e.printStackTrace();
+		 }
 	}
+
 }
