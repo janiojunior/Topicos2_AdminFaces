@@ -11,8 +11,6 @@ import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
 
 import br.unitins.topicos2.model.Cidade;
-import br.unitins.topicos2.validation.CidadeValidation;
-import br.unitins.topicos2.validation.Validation;
 
 @Named
 @ViewScoped
