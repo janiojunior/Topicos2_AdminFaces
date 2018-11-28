@@ -19,6 +19,10 @@ public class UsuarioController extends Controller<Usuario>  {
 
 	private static final long serialVersionUID = 4689020451003580454L;
 
+	public UsuarioController() {
+		super(null);
+	}
+	
 	public void limpar() {
 		setEntity(null);
 	}

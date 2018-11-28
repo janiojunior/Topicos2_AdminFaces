@@ -7,13 +7,13 @@ import br.unitins.topicos2.application.Util;
 import br.unitins.topicos2.factory.JPAFactory;
 import br.unitins.topicos2.model.Usuario;
 import br.unitins.topicos2.repository.UsuarioRepository;
+import br.unitins.topicos2.validation.Validation;
 
 @Named
 @RequestScoped
 public class LoginController extends DefaultController {
-
 	private static final long serialVersionUID = -2482810615603773001L;
-	
+
 	private Usuario usuario;
 	
 	public String entrar() {

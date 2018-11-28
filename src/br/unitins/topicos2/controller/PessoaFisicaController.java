@@ -19,10 +19,12 @@ import br.unitins.topicos2.model.Sexo;
 import br.unitins.topicos2.model.Telefone;
 import br.unitins.topicos2.repository.CidadeRepository;
 import br.unitins.topicos2.repository.PessoaRepository;
+import br.unitins.topicos2.validation.Validation;
 
 @Named
 @ViewScoped
 public class PessoaFisicaController extends Controller<PessoaFisica>  {
+
 
 	private static final long serialVersionUID = -4270221378549569000L;
 
@@ -34,6 +36,9 @@ public class PessoaFisicaController extends Controller<PessoaFisica>  {
 	
 	private List<Cidade> listaCidade = null;
 	
+	public PessoaFisicaController() {
+		super(null);
+	}
 	
 	public void adicionarTelefone() {
 		if (getEntity().getListaTelefone() == null)

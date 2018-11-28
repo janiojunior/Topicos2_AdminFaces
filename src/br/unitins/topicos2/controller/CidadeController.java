@@ -11,11 +11,17 @@ import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
 
 import br.unitins.topicos2.model.Cidade;
+import br.unitins.topicos2.validation.CidadeValidation;
+import br.unitins.topicos2.validation.Validation;
 
 @Named
 @ViewScoped
 @RolesAllowed("ADMINISTRADOR")
 public class CidadeController extends Controller<Cidade>  {
+
+	public CidadeController() {
+		super(null);
+	}
 
 	private static final long serialVersionUID = 4689020451003580454L;
 

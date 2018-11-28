@@ -22,31 +22,36 @@ public class SecurityFilter implements Filter{
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		
-		HttpServletRequest servletRequest = (HttpServletRequest) request;
+		//autorizando tudo
+		chain.doFilter(request, response);
+		return;
 		
-		// imprime o endereco da pagina solicitada
-		System.out.println(servletRequest.getRequestURI());
 		
-		
-		HttpSession session = servletRequest.getSession(false);
-		Usuario usuario = null;
-		
-		if (session != null)
-			usuario = (Usuario) session.getAttribute("usuarioLogado");
-													  
-		if (usuario == null) {
-			((HttpServletResponse) response).sendRedirect("/topicos2/login.xhtml"); 
-		} else {
-			String endereco = servletRequest.getRequestURI();
-			for (String pagina : usuario.getTipoUsuario().getPages()) {
-				if (endereco.contains(pagina)) {
-					chain.doFilter(request, response);
-					return;
-				}
-			}
-			
-			((HttpServletResponse) response).sendRedirect("/topicos2/sempermissao.xhtml");
-		}
+//		HttpServletRequest servletRequest = (HttpServletRequest) request;
+//		
+//		// imprime o endereco da pagina solicitada
+//		System.out.println(servletRequest.getRequestURI());
+//		
+//		
+//		HttpSession session = servletRequest.getSession(false);
+//		Usuario usuario = null;
+//		
+//		if (session != null)
+//			usuario = (Usuario) session.getAttribute("usuarioLogado");
+//													  
+//		if (usuario == null) {
+//			((HttpServletResponse) response).sendRedirect("/topicos2/login.xhtml"); 
+//		} else {
+//			String endereco = servletRequest.getRequestURI();
+//			for (String pagina : usuario.getTipoUsuario().getPages()) {
+//				if (endereco.contains(pagina)) {
+//					chain.doFilter(request, response);
+//					return;
+//				}
+//			}
+//			
+//			((HttpServletResponse) response).sendRedirect("/topicos2/sempermissao.xhtml");
+//		}
 	}
 	
 	@Override

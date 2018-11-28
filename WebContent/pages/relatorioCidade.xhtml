@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/template2.xhtml">
+
+	<ui:define name="conteudo">
+
+		<p:growl id="growl" showDetail="false" sticky="false" life="5000" />
+
+		<h2>Relatório de Cidades</h2>
+		
+		<div class="ui-g-12">
+			<p:panel styleClass="card no-border" toggleable="true"
+				toggleSpeed="300">
+	
+				<h:form id="formDados">
+					
+					<div style="text-align: left;"
+						class="ui-fluid #{layoutMB.flat ? 'ui-flat':''} ">
+						<p:panelGrid id="pgDados" columns="3"
+							columnClasses="ui-grid-col-6, ui-grid-col-3, ui-grid-col-3" layout="grid"
+							styleClass="ui-fluid card" >						
+		
+							<p:inputText value="#{relatorioCidadeController.nomeCidade}"/>
+
+							<p:commandButton value="Pesquisar"
+								styleClass="m-button"
+								action="#{relatorioCidadeController.pesquisar}"
+								process="formDados"
+								update="formDados" />
+	
+							<p:commandButton value="Imprimir" 
+								styleClass="m-button"
+								actionListener="#{relatorioCidadeController.imprimir}" 	process="formDados" />
+								
+						</p:panelGrid>
+					</div>
+				
+
+					<p:dataTable id="dataTable" value="#{relatorioCidadeController.listaCidade}"
+						var="objeto" widgetVar="dataTableWV" reflow="true">
+						<f:facet name="header" >Lista de Cidades</f:facet>
+						<p:column>
+							<f:facet name="header">Id</f:facet>
+							<h:outputText value="#{objeto.id}" />
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Nome</f:facet>
+							<h:outputText value="#{objeto.nome}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">Estado</f:facet>
+							<h:outputText value="#{objeto.estado}"/>
+						</p:column>
+						<p:column>
+							<f:facet name="header">Mensalidade</f:facet>
+							<h:outputText value="#{objeto.pais}" />
+						</p:column>													
+	
+					</p:dataTable>
+				</h:form>
+			</p:panel>
+		</div>
+
+	</ui:define>
+</ui:composition>

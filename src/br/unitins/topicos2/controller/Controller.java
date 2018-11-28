@@ -4,11 +4,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.OptimisticLockException;
 
 import br.unitins.topicos2.application.Util;
+import br.unitins.topicos2.application.ValidationException;
 import br.unitins.topicos2.factory.JPAFactory;
 import br.unitins.topicos2.model.DefaultEntity;
 import br.unitins.topicos2.repository.Repository;
+import br.unitins.topicos2.validation.Validation;
 
 public abstract class Controller<T extends DefaultEntity<? super T>> extends DefaultController {
+	
+	private Validation<T> validation = null;
 	
 	private static final long serialVersionUID = -4859697154833778954L;
 	
@@ -17,6 +21,14 @@ public abstract class Controller<T extends DefaultEntity<? super T>> extends Def
 	protected T entity = null;
 	
 	public abstract T getEntity();
+	
+	public Controller(Validation<T> validation) {
+		this.validation = validation;
+	}
+	
+	public Validation<T> getValidation() {
+		return validation;
+	}
 	
 	public void setEntity(T entity) {
 		this.entity = entity;
@@ -31,6 +43,15 @@ public abstract class Controller<T extends DefaultEntity<? super T>> extends Def
 	public abstract void limpar();
 	
 	public T incluir() {
+		
+		try {
+			if (getValidation() !=null)
+				getValidation().validate(getEntity());
+		} catch (ValidationException e) {
+			Util.addErroMessage(e.getMessage());
+			return null;
+		}
+		
 		Repository<T> repository = new Repository<T>(getEntityManager());
 		getEntityManager().getTransaction().begin();
 		
@@ -45,6 +66,9 @@ public abstract class Controller<T extends DefaultEntity<? super T>> extends Def
 	
 	public T alterar() {
 		try {
+			if (getValidation() !=null)
+				getValidation().validate(getEntity());
+	
 			Repository<T> repository = new Repository<T>(getEntityManager());
 			getEntityManager().getTransaction().begin();
 			
@@ -58,6 +82,9 @@ public abstract class Controller<T extends DefaultEntity<? super T>> extends Def
 		} catch (OptimisticLockException exception) {
 			// capiturando a excecao do version
 			Util.addInfoMessage("Erro de concorrencia.");
+			return null;
+		} catch (ValidationException e) {
+			Util.addErroMessage(e.getMessage());
 			return null;
 		}
 	}

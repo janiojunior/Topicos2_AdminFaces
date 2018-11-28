@@ -5,10 +5,12 @@ import java.io.Serializable;
 import br.unitins.topicos2.application.Session;
 import br.unitins.topicos2.application.Util;
 import br.unitins.topicos2.model.Usuario;
+import br.unitins.topicos2.validation.Validation;
 
 public class DefaultController implements Serializable {
 
 	private static final long serialVersionUID = 1007297527954376818L;
+	
 	private static final String userKey = "usuarioLogado";
 	
 	public Usuario getUsuarioLogado() {
