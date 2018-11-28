@@ -11,6 +11,7 @@ import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
 
 import br.unitins.topicos2.model.Cidade;
+import br.unitins.topicos2.validation.CidadeValidation;
 
 @Named
 @ViewScoped
@@ -18,7 +19,7 @@ import br.unitins.topicos2.model.Cidade;
 public class CidadeController extends Controller<Cidade>  {
 
 	public CidadeController() {
-		super(null);
+		super(new CidadeValidation());
 	}
 
 	private static final long serialVersionUID = 4689020451003580454L;
